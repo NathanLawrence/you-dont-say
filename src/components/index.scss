@@ -1,0 +1,38 @@
+
+// FONTS
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;800&display=swap');
+$weight-normal: 400;
+$weight-light: 300;
+$weight-bold: 800;
+
+// COLORS
+$billboard-bkg: #41474e;
+$color-text-body: #eee;
+
+body {
+  font-family: 'Public Sans', sans-serif;
+  background-color: #222;
+  color: $color-text-body;
+}
+
+div.billboard {
+  max-width: 800px;
+  margin: 2rem 1rem;
+  background-color: rgba($billboard-bkg, 0.5);
+  color: #eee;
+
+  h1 {
+    font-size: 3.3rem;
+    font-weight: $weight-bold;
+    padding: 1.5rem 2rem;
+    text-align: right;
+
+    p {
+      font-size: 2rem;
+      font-weight: $weight-light;
+      margin-top: 5em;
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
+  }
+}
