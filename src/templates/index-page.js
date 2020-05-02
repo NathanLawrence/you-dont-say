@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import {Billboard} from "../components/billboard";
+import {css, jsx} from "@emotion/core";
+import {TopLevelDisplayBlock} from "../components/TopLevelDisplayBlock";
+import {PeopleGrid} from "../components/PeopleGrid";
 
 import Layout from '../components/Layout'
 import Features from '../components/Features'
@@ -14,7 +17,14 @@ export const IndexPageTemplate = ({
       <Billboard dek={dek} title={title} />
       <Billboard dek={`There are ${people.totalCount} people`} title={"ok"} />
 
-      <p>Friday, April 10, 2020</p>
+      <TopLevelDisplayBlock>
+          <p>Testing</p>
+          <PeopleGrid people={people} />
+      </TopLevelDisplayBlock>
+
+      <p
+        css={css`
+        color: black;`}>Friday, April 10, 2020</p>
 
     </>
 )
@@ -22,7 +32,14 @@ export const IndexPageTemplate = ({
 
 const IndexPage = ({ data }) => {
   const { frontmatter } = data.markdownRemark;
-    const people = data.people;
+    const people = data.people.edges.map(
+        obj => (
+            {
+                ...obj.node.frontmatter,
+                ...obj.node.fields
+            }
+        )
+    );
 
   return (
     <Layout>
