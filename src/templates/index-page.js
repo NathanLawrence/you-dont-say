@@ -8,11 +8,11 @@ import Features from '../components/Features'
 import BlogRoll from '../components/BlogRoll'
 
 export const IndexPageTemplate = ({
-  title, dek,
+  title, dek, people
 }) => (
     <>
       <Billboard dek={dek} title={title} />
-      <Billboard dek={"This is a test"} title={"ok"} />
+      <Billboard dek={`There are ${people.totalCount} people`} title={"ok"} />
 
       <p>Friday, April 10, 2020</p>
 
@@ -21,13 +21,15 @@ export const IndexPageTemplate = ({
 
 
 const IndexPage = ({ data }) => {
-  const { frontmatter } = data.markdownRemark
+  const { frontmatter } = data.markdownRemark;
+    const people = data.people;
 
   return (
     <Layout>
       <IndexPageTemplate
         title={frontmatter.title}
         dek={frontmatter.dek}
+        people={people}
       />
     </Layout>
   )
@@ -45,6 +47,24 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexPageTemplate {
+      people: allMarkdownRemark(
+          limit: 1000
+          sort: { fields: [frontmatter___name], order: DESC }
+          filter: { frontmatter: { templateKey: { eq: "person" } } }
+        ) {
+          totalCount
+          edges {
+            node {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                name
+              }
+            }
+          }
+        }
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
       frontmatter {
         title
