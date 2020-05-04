@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import {css, jsx} from "@emotion/core";
 import {TopLevelDisplayBlock} from "./TopLevelDisplayBlock";
+import PreviewCompatibleImage from "./PreviewCompatibleImage";
+import Img from "gatsby-image";
+import {EnforcedSquare} from "./EnforcedSquare";
 
 export const PeopleGrid = ({ people }) => (
     <div css={css`
@@ -13,7 +16,20 @@ export const PeopleGrid = ({ people }) => (
     `}>
         {
             people.map((person, index) => (
-                <div>{person.name} - {person.slug}</div>
+                <Link to={person.slug} key={person.slug}>
+                    <div>
+                        <EnforcedSquare>
+                            <Img
+                                css={css`
+                                border-radius: 50%;
+                                margin: 10px;
+                                object-fit: cover;
+                            `}
+                                fluid={person.photo.childImageSharp.fluid} />
+                        </EnforcedSquare>
+                        <div>{person.name} - {person.slug}</div>
+                    </div>
+                </Link>
             ))
         }
     </div>

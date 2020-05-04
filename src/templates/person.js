@@ -30,6 +30,13 @@ export const pageQuery = graphql`
       html
       frontmatter {
       name
+      photo {
+        childImageSharp {
+          fluid(maxWidth: 400, quality: 95) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
       }
     }
   }
