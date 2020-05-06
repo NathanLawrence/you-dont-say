@@ -9,11 +9,16 @@ import {PeopleGrid} from "../components/PeopleGrid";
 import Layout from '../components/Layout'
 import Features from '../components/Features'
 import BlogRoll from '../components/BlogRoll'
+import {Helmet} from "react-helmet/es/Helmet";
 
 export const IndexPageTemplate = ({
   title, dek, people
 }) => (
     <>
+        <Helmet>
+            <title>{title} - KBIA</title>
+            <meta name="description" content={dek} />
+        </Helmet>
 
       <Billboard dek={dek} title={title} />
 

@@ -5,12 +5,22 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
+import {TopLevelDisplayBlock} from "../components/TopLevelDisplayBlock";
+import {Billboard} from "../components/billboard";
+import {PersonHeadingBillboard} from "../components/PersonHeadingBillboard";
 
 const PersonPage = ({ data }) => {
-  const { markdownRemark: post } = data
+  const { markdownRemark: personRemark } = data
+  const person = {
+    ...personRemark.frontmatter,
+    ...personRemark
+  }
   return (
     <Layout>
-      {post.frontmatter.name}
+      <Helmet>
+        <title>{person.name} - You Don't Say - KBIA</title>
+      </Helmet>
+        <PersonHeadingBillboard person={person} />
     </Layout>
   )
 }
