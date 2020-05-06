@@ -14,17 +14,13 @@ export const IndexPageTemplate = ({
   title, dek, people
 }) => (
     <>
+
       <Billboard dek={dek} title={title} />
-      <Billboard dek={`There are ${people.totalCount} people`} title={"ok"} />
 
       <TopLevelDisplayBlock>
           <p>Testing</p>
           <PeopleGrid people={people} />
       </TopLevelDisplayBlock>
-
-      <p
-        css={css`
-        color: black;`}>Friday, April 10, 2020</p>
 
     </>
 )

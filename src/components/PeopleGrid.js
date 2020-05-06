@@ -24,6 +24,9 @@ export const PeopleGrid = ({ people }) => (
                                 border-radius: 50%;
                                 margin: 10px;
                                 object-fit: cover;
+                                width: 80%;
+                                height: 80%;
+                                margin: auto;
                             `}
                                 fluid={person.photo.childImageSharp.fluid} />
                         </EnforcedSquare>

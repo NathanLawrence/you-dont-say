@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import github from '../img/github-icon.svg'
 import logo from '../img/logo.svg'
+import {TopLevelDisplayBlock} from "./TopLevelDisplayBlock";
 
 const Navbar = class extends React.Component {
   constructor(props) {
@@ -34,7 +35,11 @@ const Navbar = class extends React.Component {
 
   render() {
     return (
-      <> </>
+      <>
+        <TopLevelDisplayBlock>
+
+        </TopLevelDisplayBlock>
+      </>
     )
   }
 }
