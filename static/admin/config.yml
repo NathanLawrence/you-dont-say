@@ -35,4 +35,5 @@ collections:
       - {label: "Audio URL", name: "audioURL", widget: "string"}
       - {label: "Photo", name: "photo", widget: image, required: false}
       - {label: "Participants", name: "participants", widget: relation, collection: "people", multiple: true, displayFields: ["name"], valueField: "name", searchFields: ["name"]}
+      - {label: "Transcription", name: "transcription", widget: "markdown"}
 
