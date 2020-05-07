@@ -2,6 +2,10 @@ const _ = require('lodash')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+const unified = require('unified')
+const markdown = require('remark-parse')
+const remark2rehype = require('remark-rehype')
+const html = require('rehype-stringify')
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
@@ -84,4 +88,57 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
   }
+}
+
+exports.sourceNodes = ({ boundActionCreators: { createNodeField }, getNodes, getNode }) => {
+  // Attach conversations to people
+  const people = getNodes()
+      .filter(node => node.internal.type === `MarkdownRemark`)
+      .filter(node => node.frontmatter.templateKey && node.frontmatter.templateKey.includes('person'))
+
+  people.map(personNode => {
+    const conversations = getNodes()
+        .filter(node => node.internal.type === `MarkdownRemark`)
+        .filter(node=> node.frontmatter.templateKey && node.frontmatter.templateKey.includes('conversation'))
+        .filter(node => node.frontmatter.participants && node.frontmatter.participants.includes(personNode.frontmatter.name))
+
+    createNodeField({
+      node: personNode,
+      name: 'conversations',
+      value: conversations.map(conversationNode => conversationNode)
+    })
+  })
+
+  const convos = getNodes()
+      .filter(node => node.internal.type === `MarkdownRemark`)
+      .filter(node => node.frontmatter.templateKey && node.frontmatter.templateKey.includes('conversation'))
+
+  convos.map(conversationNode => {
+
+    if (conversationNode.frontmatter.transcription) {
+        const processor = unified()
+            .use(markdown, {commonmark: true})
+            .use(remark2rehype)
+            .use(html)
+
+      let text = processor.processSync(conversationNode.frontmatter.transcription).toString()
+
+      createNodeField({
+        node: conversationNode,
+        name: "transcriptionHTML",
+        value: text
+      })
+    }
+
+    const participants = getNodes()
+        .filter(node => node.internal.type === `MarkdownRemark`)
+        .filter(node => node.frontmatter.templateKey && node.frontmatter.templateKey.includes('person'))
+        .filter(node => node.frontmatter.name && conversationNode.frontmatter.participants.includes(node.frontmatter.name))
+
+    createNodeField({
+      node: conversationNode,
+      name: 'people',
+      value: participants.map(personNode => personNode)
+    })
+  })
 }

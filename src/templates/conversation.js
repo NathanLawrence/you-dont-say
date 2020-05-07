@@ -5,12 +5,19 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
+import {TopLevelDisplayBlock} from "../components/TopLevelDisplayBlock";
 
 const ConversationPage = ({ data }) => {
   const { markdownRemark: post } = data
   return (
     <Layout>
-      {post.frontmatter.title}
+      <TopLevelDisplayBlock>
+        <h1>{post.frontmatter.title}</h1>
+          <div>
+              <audio controls src={post.frontmatter.audioURL}></audio>
+          </div>
+        <div dangerouslySetInnerHTML={{"__html": post.fields.transcriptionHTML}}></div>
+      </TopLevelDisplayBlock>
     </Layout>
   )
 }
@@ -28,8 +35,13 @@ export const pageQuery = graphql`
     markdownRemark(id: { eq: $id }) {
       id
       html
+      fields {
+        transcriptionHTML
+      }
       frontmatter {
+      audioURL
       title
+      transcription
       }
     }
   }
