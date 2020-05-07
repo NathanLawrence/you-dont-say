@@ -27,7 +27,7 @@ collections:
     label: "Conversations"
     folder: "src/pages/conversations"
     create: true
-    slug: "{{conversation}}"
+    slug: "{{title}}"
     label_singular: "Conversation"
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "conversation"}
