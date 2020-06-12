@@ -14,8 +14,9 @@ export const PeopleGrid = ({ people }) => (
     columns={[
         1,
         2,
-        4,
-        5
+        5,
+        7,
+        10
     ]}>
     {
         people.map((person, index) => (
