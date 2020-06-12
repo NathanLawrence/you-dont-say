@@ -5,7 +5,7 @@ import {Billboard} from "../components/billboard";
 import {css, jsx} from "@emotion/core";
 import {TopLevelDisplayBlock} from "../components/TopLevelDisplayBlock";
 import {PeopleGrid} from "../components/PeopleGrid";
-
+import {Styled} from "theme-ui";
 import Layout from '../components/Layout'
 import Features from '../components/Features'
 import BlogRoll from '../components/BlogRoll'
@@ -23,7 +23,7 @@ export const IndexPageTemplate = ({
       <Billboard dek={dek} title={title} />
 
       <TopLevelDisplayBlock>
-          <p>Testing</p>
+          <Styled.h2>Who Are Sharing Their Stories?</Styled.h2>
           <PeopleGrid people={people} />
       </TopLevelDisplayBlock>
 

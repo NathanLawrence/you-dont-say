@@ -11,6 +11,10 @@ const ConversationPage = ({ data }) => {
   const { markdownRemark: post } = data
   return (
     <Layout>
+        <Helmet>
+            <meta charset="utf-8" />
+            <title>{post.frontmatter.title} - You Don't Say - KBIA</title>
+        </Helmet>
       <TopLevelDisplayBlock>
         <h1>{post.frontmatter.title}</h1>
           <div>
