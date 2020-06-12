@@ -7,9 +7,14 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
-    'gatsby-plugin-theme-ui',
     {
       resolve: `gatsby-plugin-emotion`,
+    },
+    {
+      resolve: 'gatsby-plugin-theme-ui',
+      options: {
+        preset: '@theme-ui/preset-deep'
+      }
     },
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support

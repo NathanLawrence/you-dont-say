@@ -1,38 +1,55 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
-import {css, jsx} from "@emotion/core";
+import { jsx, Styled  } from 'theme-ui';
 import {TopLevelDisplayBlock} from "./TopLevelDisplayBlock";
 import PreviewCompatibleImage from "./PreviewCompatibleImage";
 import Img from "gatsby-image";
 import {EnforcedSquare} from "./EnforcedSquare";
 
 export const PeopleGrid = ({ people }) => (
-    <div css={css`
-        display: grid;
-        grid-column-gap: 50px;
-        grid-row-gap: 50px;
-        grid-template-columns: repeat(5, 1fr);
-    `}>
+    <div css={{
+        display: 'grid',
+        gridColumnGap: '50px',
+        gridRowGap: '50px',
+        gridTemplateColumns: 'repeat(5, 1fr)'
+    }}>
         {
             people.map((person, index) => (
-                <Link to={person.slug} key={person.slug}>
+                <>
                     <div>
-                        <EnforcedSquare>
-                            <Img
-                                css={css`
-                                border-radius: 50%;
-                                margin: 10px;
-                                object-fit: cover;
-                                width: 80%;
-                                height: 80%;
-                                margin: auto;
-                            `}
-                                fluid={person.photo.childImageSharp.fluid} />
-                        </EnforcedSquare>
-                        <div>{person.name} - {person.slug}</div>
+                        <Link to={person.slug} key={person.slug}>
+                                <EnforcedSquare>
+                                    <Img
+                                        css={{
+                                            borderRadius: '50%',
+                                            margin: '10px auto',
+                                            objectFit: 'cover',
+                                            width: '91%',
+                                            height: '90%',
+                                        }}
+                                        fluid={person.photo.childImageSharp.fluid} />
+                                </EnforcedSquare>
+                        </Link>
+                        <Styled.h4 css={{
+                            textAlign: 'center',
+                            marginBlockStart: '6px',
+                            marginBlockEnd: '0px'
+                        }}>
+                            <Link to={person.slug} key={person.slug}
+                                css={{
+                                    textDecoration: 'none',
+                                    color: '#ddd',
+                                }}
+                                  sx={{
+                                      color: 'primary'
+                                  }}
+                            >
+                            {person.name}
+                            </Link>
+                        </Styled.h4>
                     </div>
-                </Link>
+                </>
             ))
         }
     </div>
