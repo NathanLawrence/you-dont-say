@@ -10,7 +10,7 @@
     "@theme-ui/presets": "^0.3.0",
     "babel": "^6.23.0",
     "bulma": "^0.8.0",
-    "gatsby": "^2.13.31",
+    "gatsby": "^2.32.13",
     "gatsby-image": "^2.0.23",
     "gatsby-plugin-emotion": "^4.3.0",
     "gatsby-plugin-netlify": "^2.0.6",
